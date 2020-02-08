@@ -8,7 +8,7 @@ YelpCamp is a website for people to find the best fictional campgrounds and thei
 * [Express](https://expressjs.com/en/4x/api.html)
 * [Mongoose](https://mongoosejs.com/docs/api.html)
 * [Passport](Passport)
-* [MongoDB](https://docs.mongodb.com/)
+* [MongoDB Atlas](https://docs.mongodb.com/)
 
 ## Authors
 
