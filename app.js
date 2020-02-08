@@ -22,11 +22,7 @@ try{
     console.log('error: ' + err);
 }
 
-//Connect to database
-// const connectionString = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASS + process.env.DB_NAME;
-
 const connectionString = process.env.DB_URL;
-// const connectionString = 'mongodb+srv://adamva:FcUoP1SIQuFsn8UZ@cluster0-ke7sj.mongodb.net/YelpCamp?retryWrites=true&w=majority';
 
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
