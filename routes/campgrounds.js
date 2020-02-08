@@ -22,7 +22,7 @@ router.get('/', function (req, res) {
 
 //NEW - Show new campground form
 router.get('/new', middleware.isLoggedIn, function (req, res) {
-    res.render("campgrounds/new");
+    res.render('campgrounds/new');
 });
 
 //CREATE - Add new campground to DB

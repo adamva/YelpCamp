@@ -8,7 +8,7 @@ const router = express.Router({mergeParams: true}); //this merges the params of 
 //Notice that in both get and post routes isLoggedIn is called. isLoggedIn acts as a middleware to prevent anyone who is not logged in from making comments
 
 //Comments new
-router.get("/new", middleware.isLoggedIn, (req, res) => {
+router.get('/new', middleware.isLoggedIn, (req, res) => {
     //Find campground by ID
     Campground.findById(req.params.id, (err, foundCampground) => {
         if (err || !foundCampground) {
@@ -21,7 +21,7 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 });
 
 //Comments create
-router.post("/", middleware.isLoggedIn, (req, res) => {
+router.post('/', middleware.isLoggedIn, (req, res) => {
     //Lookup campground using ID
     Campground.findById(req.params.id, (err, foundCampground) => {
         if (err || !foundCampground) {

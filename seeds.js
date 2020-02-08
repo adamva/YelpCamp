@@ -11,7 +11,7 @@ async function seedDB() {
         await Comment.deleteMany({});
         await Campground.deleteMany({});
         await User.deleteOne({username: 'Oryx'});
-        console.log("Removed campgrounds, comments and dummy user: \'Oryx\'");
+        console.log('Removed campgrounds, comments and dummy user: \'Oryx\'');
 
         //Add new seeds to DB
         let seedUser = new User({username: 'Oryx'});
@@ -31,7 +31,7 @@ async function seedDB() {
             campground.comments.push(comment);
             campground.author = author;
             campground.save();
-            console.log("Campground added to DB");
+            console.log('Campground added to DB');
         }
     } catch(err){
         console.log(err.message);
