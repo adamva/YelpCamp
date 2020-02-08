@@ -16,14 +16,17 @@ const   commentRoutes       = require('./routes/comments'),
         indexRoutes         = require('./routes/index');
 
 //Environment setup
-try{
-    const env = require('dotenv').config();
-} catch(err){
-    console.log('error: ' + err);
-}
+// try{
+//     const env = require('dotenv').config();
+// } catch(err){
+//     console.log('error: ' + err);
+// }
 
 //Connect to database
-const connectionString = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASS + process.env.DB_NAME;
+// const connectionString = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASS + process.env.DB_NAME;
+
+const connectionString = 'mongodb+srv://adamva:FcUoP1SIQuFsn8UZ@cluster0-ke7sj.mongodb.net/YelpCamp?retryWrites=true&w=majority';
+
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useCreateIndex: true, 
@@ -31,7 +34,7 @@ mongoose.connect(connectionString, {
 }).then(() => {
     console.log('Conneted to DB');
 }).catch(err => {
-    console.log('error: ', err.message);
+    console.log('DB connection error: ', err.message);
 });
 
 //Flash Config
@@ -73,6 +76,6 @@ app.use('/campgrounds/:id/comments', commentRoutes);
 app.use(indexRoutes);
 
 //Express listening for connections
-app.listen(process.env.PORT | 5500, process.env.IP, function () {
+app.listen(process.env.PORT || 5500, process.env.IP, function () {
     console.log('Yelpcamp server has started!');
 });
