@@ -17,4 +17,4 @@ YelpCamp is a website for people to find the best fictional campgrounds and thei
 ## Acknowledgments
 
 * **Colt Steele's** - This website was made in tandem with the course *The Web Developer Bootcamp* (https://www.udemy.com/course/the-web-developer-bootcamp/).
-* **Ian Schoonover** - Many additional features were under the his guidance.
+* **Ian Schoonover** - Many additional features were under his guidance.
