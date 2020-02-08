@@ -34,7 +34,7 @@ mongoose.connect(connectionString, {
 }).then(() => {
     console.log('Conneted to DB');
 }).catch(err => {
-    console.log('error: ', err.message);
+    console.log('DB connection error: ', err.message);
 });
 
 //Flash Config
