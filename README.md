@@ -4,9 +4,11 @@ YelpCamp is a website for people to find the best fictional campgrounds and thei
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Node.js](https://nodejs.org/en/docs/)
+* [Express](https://expressjs.com/en/4x/api.html)
+* [Mongoose](https://mongoosejs.com/docs/api.html)
+* [Passport](Passport)
+* [MongoDB](https://docs.mongodb.com/)
 
 ## Authors
 
