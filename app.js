@@ -16,14 +16,17 @@ const   commentRoutes       = require('./routes/comments'),
         indexRoutes         = require('./routes/index');
 
 //Environment setup
-try{
-    const env = require('dotenv').config();
-} catch(err){
-    console.log('error: ' + err);
-}
+// try{
+//     const env = require('dotenv').config();
+// } catch(err){
+//     console.log('error: ' + err);
+// }
 
 //Connect to database
-const connectionString = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASS + process.env.DB_NAME;
+// const connectionString = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASS + process.env.DB_NAME;
+
+const connectionString = 'mongodb+srv://adamva:FcUoP1SIQuFsn8UZ@cluster0-ke7sj.mongodb.net/YelpCamp?retryWrites=true&w=majority';
+
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useCreateIndex: true, 
