@@ -25,7 +25,8 @@ const   commentRoutes       = require('./routes/comments'),
 //Connect to database
 // const connectionString = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASS + process.env.DB_NAME;
 
-const connectionString = 'mongodb+srv://adamva:FcUoP1SIQuFsn8UZ@cluster0-ke7sj.mongodb.net/YelpCamp?retryWrites=true&w=majority';
+const connectionString = 'mongodb://127.0.0.1:27017'
+// const connectionString = 'mongodb+srv://adamva:FcUoP1SIQuFsn8UZ@cluster0-ke7sj.mongodb.net/YelpCamp?retryWrites=true&w=majority';
 
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
