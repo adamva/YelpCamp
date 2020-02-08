@@ -7,9 +7,7 @@ const   express     = require('express'),
         passport    = require('passport'),
         LocalStrategy = require('passport-local'),
         methodOverride = require('method-override'),
-        Campground  = require('./models/campground'),
         User        = require('./models/user'),
-        Comment     = require('./models/comment'),
         seedDB      = require('./seeds');
 
 //Requires for routes
@@ -18,11 +16,13 @@ const   commentRoutes       = require('./routes/comments'),
         indexRoutes         = require('./routes/index');
 
 //Environment setup
-require('dotenv').config();
+try{
+    const env = require('dotenv').config();
+} catch(err){
+    console.log('error: ' + err);
+}
 
-//Connect to database with mongoose
-//The connection is with the localhost mongodb but 
-//this connection string can be swapped with a cloud based DB as well
+//Connect to database
 const connectionString = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASS + process.env.DB_NAME;
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
