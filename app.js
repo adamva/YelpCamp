@@ -7,9 +7,7 @@ const   express     = require('express'),
         passport    = require('passport'),
         LocalStrategy = require('passport-local'),
         methodOverride = require('method-override'),
-        Campground  = require('./models/campground'),
         User        = require('./models/user'),
-        Comment     = require('./models/comment'),
         seedDB      = require('./seeds');
 
 //Requires for routes
