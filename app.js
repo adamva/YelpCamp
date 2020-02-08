@@ -17,15 +17,19 @@ const   commentRoutes       = require('./routes/comments'),
         campgroundRoutes    = require('./routes/campgrounds'),
         indexRoutes         = require('./routes/index');
 
+//Environment setup
+require('dotenv').config();
+
 //Connect to database with mongoose
 //The connection is with the localhost mongodb but 
 //this connection string can be swapped with a cloud based DB as well
-mongoose.connect('mongodb://localhost:27017/yelp_camp', {
+const connectionString = 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASS + process.env.DB_NAME;
+mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useCreateIndex: true, 
     useUnifiedTopology: true
 }).then(() => {
-    console.log('conneted to db');
+    console.log('Conneted to DB');
 }).catch(err => {
     console.log('error: ', err.message);
 });
@@ -53,7 +57,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 
 //Clear database and seed with new data
-seedDB();
+// seedDB();
 
 //This is a middleware for EVERY route
 app.use((req, res, next) => {
