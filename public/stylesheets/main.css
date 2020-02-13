@@ -34,28 +34,12 @@ body{
     flex-direction: column;
 }
 
-.thumbnail img {
-    width: 100%;
-}
-
-.thumbnail {
-    padding: 0;
-}
-
-.thumbnail .caption-full{
-    padding: 0.5em;
-}
-
 .delete-form {
     display: inline;
 }
 
-.content{
-    flex: 1 0 auto;
-}
-
 .footer{
-    flex-shrink: 0;
+    margin-top: auto;
     padding: 15px 10px;
     text-align: center;
     background-color: rgb(207, 207, 207);
