@@ -15,15 +15,20 @@ router.get('/', function (req, res) {
 
 //Show register form
 router.get('/register', (req, res) => {
-    res.render('register');
+    if (process.env.CUR_ENV !== 'local') {
+        req.flash('error', 'Sorry. That feature has been disabled.'); 
+        return res.redirect('/');
+    } else {
+        res.render('register');
+    }    
 });
 
 //Handle sign up logic
 router.post('/register', (req, res) => {
     let newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, (err, user) => {
-        if (err) {
-            req.flash('error', err.message); 
+        if (err || process.env.CUR_ENV !== 'local') {
+            req.flash('error', 'Opps, something went wrong.'); 
             return res.redirect('/register');
         } else{
             //after creating new user, log them in

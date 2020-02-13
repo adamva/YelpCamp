@@ -1,41 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>YelpCamp</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<%- include("partials/header") %> 
     <link rel="stylesheet" href="/stylesheets/landing.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
-</head>
-<body>
-    <div class="content">
-        <%- include("partials/navbar") %> 
-        
-        <div class="container">
-            <% if(error && error.length > 0){ %>
-                <div class="alert alert-danger" role="alert">
-                    <%= error %>
+    <script src="https://kit.fontawesome.com/f005ebedaf.js" crossorigin="anonymous"></script>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-10 col-md-8 text-center">
+            <div class="jumbotron pb-1">
+                <div class="header">
+                    <h1 class="display-4">YelpCamp</h1>
                 </div>
-            <% } %>
-            <% if(success && success.length > 0){ %>
-                <div class="alert alert-success" role="alert">
-                    <%= success %>
-                </div>
-            <% } %>
+                <p class="lead">View your next vactation spot now!</p>             
+                <p class="lead mt-5">
+                    <a class="btn btn-success btn-lg" href="/campgrounds" role="button"><i class="fas fa-tree pr-3"></i>Explore</a>
+                </p>
+            </div>
         </div>
-        
-        <div id="landing-header">
-            <h1>Welcome to YelpCamp!</h1>
-            <hr>
-            <a id="campgroundBtn" href="/campgrounds" class="btn btn-lg btn-success">View All Campgrounds</a>
-        </div>
-        
-        <ul class="slideshow">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        </ul>
     </div>
+</div>
 
 <%- include("partials/footer") %> 
