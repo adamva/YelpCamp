@@ -57,7 +57,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 
 //Clear database and seed with new data
-// seedDB();
+seedDB();
 
 //This is a middleware for EVERY route
 app.use((req, res, next) => {

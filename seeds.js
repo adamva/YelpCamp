@@ -1,10 +1,17 @@
-const   mongoose    = require('mongoose'),
-        passport    = require('passport'),
-        Campground  = require('./models/campground'),
+const   Campground  = require('./models/campground'),
         Comment     = require('./models/comment'),
         User        = require('./models/user')
-        seeds       = require('./seedData');
-
+        seeds       = require('./seedData'),
+        NodeGeocoder = require('node-geocoder');
+ 
+const options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+ 
+const geocoder = NodeGeocoder(options);
 async function seedDB() {
     try {
         //Wait for pre-existing comments, camgrounds, and dummy user to be deleted from DB
@@ -19,19 +26,29 @@ async function seedDB() {
         console.log('User: \'' + seedUser.username + '\' created');
         
         let author = {id: seedUser._id, username: seedUser.username};
-        let text = {text: '0/10 Would not recommend!!'};
+        let text = '0/10 Would not recommend!!';
+        let newComment = {text: text, author: author}
+        let comment = await Comment.create(newComment);
+        
+        for(const seed of seeds) {
+            let name = seed.name;
+            let price = seed.price;
+            let image = seed.image;
+            let desc = seed.description;
 
-        for(const seed of seeds) { //New kind of forEach loop
-            //Wait for new campround to be created then add comments to the new campgrounds
-            let campground = await Campground.create(seed);
-            let comment = await Comment.create(text);
-            comment.author = author;
-            comment.save();
+            let data = await geocoder.geocode(seed.location)
+            let lat = data[0].latitude;
+            let lng = data[0].longitude;
+            let location = data[0].formattedAddress;
+
+            let newCampground = {name: name, price: price, image: image, description: desc, author: author, location: location, lat: lat, lng: lng};
+
+            let campground = await Campground.create(newCampground);
 
             campground.comments.push(comment);
-            campground.author = author;
             campground.save();
-            console.log('Campground added to DB');
+            console.log('Campground: ' + name + ' added to DB');
+            
         }
     } catch(err){
         console.log(err.message);
