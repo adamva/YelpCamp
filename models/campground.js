@@ -7,6 +7,9 @@ const campgroundSchema = new mongoose.Schema({
     price: String,
     image: String,
     description: String,
+    location: String,
+    lat: Number,
+    lng: Number,
     author: {
         //When associating a model to another model you need to specify the id of the associated model
         id: {

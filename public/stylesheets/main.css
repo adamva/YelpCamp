@@ -45,3 +45,9 @@ body{
     background-color: rgb(207, 207, 207);
     border-top: 1px solid rgb(187, 187, 187);
 }
+
+/* Google Maps */
+#map{
+    height: 400px;
+    width: 100%;
+}

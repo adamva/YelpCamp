@@ -1,3 +1,10 @@
+// Environment setup
+try{
+    require('dotenv').config();
+} catch(err){
+    console.log('error: ' + err);
+}
+
 //Requires for modules
 const   express     = require('express'),
         app         = express(),
@@ -14,13 +21,6 @@ const   express     = require('express'),
 const   commentRoutes       = require('./routes/comments'),
         campgroundRoutes    = require('./routes/campgrounds'),
         indexRoutes         = require('./routes/index');
-
-// Environment setup
-try{
-    require('dotenv').config();
-} catch(err){
-    console.log('error: ' + err);
-}
 
 const connectionString = process.env.DB_URL;
 
