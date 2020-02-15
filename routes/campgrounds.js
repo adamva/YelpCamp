@@ -1,7 +1,17 @@
 const   express     = require('express'),
         Campground  = require('../models/campground'),
         Comment     = require('../models/comment'),
-        middleware  = require('../middleware');
+        middleware  = require('../middleware'),
+        NodeGeocoder = require('node-geocoder');
+ 
+const options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+ 
+const geocoder = NodeGeocoder(options);
 
 //This adds any routes we make to the router variable then we export it for use in app.js
 const router = express.Router();
