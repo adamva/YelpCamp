@@ -10,27 +10,33 @@
             <!-- notice that for editing forms you need to use method-override in the action where you end with '?_method=PUT' -->
             <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="campground[name]" value="<%= campground.name %>">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" name="campground[name]" id="name" value="<%= campground.name %>">
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" type="number" name="campground[price]" value="<%= campground.price %>" min="0" step="0.01">
+                    <label for="">Price</label>
+                    <input class="form-control" type="number" name="campground[price]" id="price" value="<%= campground.price %>" min="0" step="0.01">
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" type="text" name="campground[image]" value="<%= campground.image %>">
+                    <label for="image">Image</label>
+                    <input class="form-control" type="text" name="campground[image]" id="image" value="<%= campground.image %>">
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" type="text" name="campground[description]" value="<%= campground.description %>">
+                    <label for="description">Description</label>
+                    <input class="form-control" type="text" name="campground[description]" id="description" value="<%= campground.description %>">
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" type="text" name="campground[location]" value="<%= campground.location %>">
+                    <label for="location">Location</label>
+                    <input class="form-control" type="text" name="campground[location]" id="location" value="<%= campground.location %>">
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                    <label for="submit">Sumbit</label>
+                    <button class="btn btn-lg btn-primary btn-block" id="submit">Submit!</button>
                 </div>
             </form>
 
