@@ -77,7 +77,7 @@ router.get('/:id', function(req, res){
             res.redirect('back');
         } else {
             //Render show template with that campground
-            res.render('campgrounds/show', {campground: foundCampground});
+            res.render('campgrounds/show', {campground: foundCampground, GMapAPI: process.env.GEOCODER_API_KEY});
         }
     });
 });
