@@ -23,7 +23,7 @@ router.get('/register', (req, res) => {
         req.flash('error', 'Sorry. That feature has been disabled.'); 
         return res.redirect('/');
     } else {
-        res.render('register');
+        res.render('users/register');
     }    
 });
 
@@ -55,7 +55,7 @@ router.post('/register', (req, res) => {
 
 //Show login form
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('users/login');
 });
 
 //Check login credentials
@@ -76,7 +76,7 @@ router.get('/logout', (req, res) => {
 
 //Forgot passwrod
 router.get('/forgot', (req, res) => {
-    res.render('forgot');
+    res.render('users/forgot');
 });
 
 //Handle forgot password logic
@@ -142,7 +142,7 @@ router.get('/reset/:token', (req, res) => {
             req.flash('error', 'Password reset token is invalid or has expired.');
             return res.redirect('/forgot');
         } else {
-            res.render('reset', {token: req.params.token});
+            res.render('users/reset', {token: req.params.token});
         }
     });
 });
