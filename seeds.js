@@ -21,7 +21,15 @@ async function seedDB() {
         console.log('Removed campgrounds, comments and users');
 
         //Add new seeds to DB
-        let seedUser = new User({username: 'Oryx', isAdmin: true});
+        let seedUser = new User({
+            username: 'Oryx',
+            avatar: 'https://images.unsplash.com/photo-1489693755295-4a1efc9e7f72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80',
+            firstName: 'Taken',
+            lastName: 'King',
+            email: 'sword@logic.org', 
+            isAdmin: true
+        });
+        
         await User.register(seedUser, 'password');
         console.log('User: \'' + seedUser.username + '\' created');
         

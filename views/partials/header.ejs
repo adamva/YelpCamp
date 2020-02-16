@@ -31,7 +31,7 @@
                     </li>
                 <% } else { %>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Hello <%= currentUser.username %></a>
+                        <a class="nav-link" href="/users/<%= currentUser._id %> ">Hello <%= currentUser.username %></a>
                     </li>
                     <% if (currentUser.isAdmin) { %>
                         <li class="nav-item">
@@ -58,7 +58,7 @@
             </div>
         <% } %>
         <% if(currentUser && currentUser.isAdmin){ %>
-            <h1 class="bg-warning rounded">Admin View</h1>
+            <h1 class="bg-warning rounded">Admin Mode</h1>
         <% } %>      
     </div>
     

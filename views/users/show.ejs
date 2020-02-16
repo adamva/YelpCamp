@@ -1,0 +1,33 @@
+<%- include("../partials/header") %>
+<div class="row mw-100">
+    <div class="col-lg-4 mh-50">
+        <div class="card">
+            <img src="<%= user.avatar %>" class="card-img-top" alt="user profile image">
+            <div class="card-body">
+                <h1 class="card-title"><%= user.firstName + ' ' +  user.lastName%></h1>
+                <p class="card-text"><%= user.email %> </p>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, dignissimos velit. Mollitia suscipit aliquam velit dolore vel molestiae, consequatur nihil cum possimus officia quae corporis iure. Non voluptate reprehenderit dignissimos deleniti ullam eos nostrum modi error ratione nemo laudantium facere id nisi delectus consequuntur nulla, molestias blanditiis quasi architecto excepturi.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 pr-0">
+        <h3><%= user.username %>'s campgrounds:</h3>
+        <!-- <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3"> -->
+        <div class="card-columns">
+            <% campgrounds.forEach(campground => { %>
+                <div class="col mb-2">
+                    <div class="card">
+                        <img src="<%= campground.image %>" alt="<%= campground.name %>" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title"><%= campground.name %></h3>
+                            <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">View Site</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div> 
+    </div>
+</div>
+<%- include("../partials/footer") %>

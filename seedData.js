@@ -18,7 +18,7 @@ const seeds = [
     {
         name: 'Coral Creek',
         price: '3.35', 
-        image: 'https://images.unsplash.com/photo-1500332988905-1bf2a5733f63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
+        image: 'https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=649&q=80',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean hendrerit sem ipsum, non semper ipsum blandit vitae. Sed sit amet pretium ante. Praesent cursus vitae libero maximus molestie. Aliquam erat volutpat. Sed egestas dolor tortor, ac feugiat dolor condimentum at. Curabitur varius ante diam, quis viverra enim mollis quis. Duis ut lobortis enim.',
         location: 'New York',
         comment: 'Never let your best friend get lonely... keep disturbing them.'
@@ -42,7 +42,7 @@ const seeds = [
     {
         name: 'Acorn Oaks',
         price: '6.30', 
-        image: 'https://images.unsplash.com/photo-1502298771545-937cd94b0f48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
+        image: 'https://images.unsplash.com/photo-1500332988905-1bf2a5733f63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean hendrerit sem ipsum, non semper ipsum blandit vitae. Sed sit amet pretium ante. Praesent cursus vitae libero maximus molestie. Aliquam erat volutpat. Sed egestas dolor tortor, ac feugiat dolor condimentum at. Curabitur varius ante diam, quis viverra enim mollis quis. Duis ut lobortis enim.',
         location: 'Tokyo',
         comment: 'Me: Did you just fall? \nFriend: No, I was just checking if gravity still works.'

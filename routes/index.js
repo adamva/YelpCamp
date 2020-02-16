@@ -1,6 +1,7 @@
 const   express     = require('express'),
         passport    = require('passport'),
-        User        = require('../models/user');
+        User        = require('../models/user')
+        Campground  = require('../models/campground');
 
 const router = express.Router();
 
@@ -68,7 +69,24 @@ router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success', 'Logged Out');
     res.redirect('/campgrounds');
-})
+});
+
+//User Profile
+router.get('/users/:id', (req, res) => {
+    User.findById(req.params.id, (err, foundUser) => {
+        if (err || !foundUser) {
+            req.flash('error', 'Could not find user');
+            return res.redirect('/');
+        }
+        Campground.find().where('author.id').equals(foundUser._id).exec((err, campgrounds) => {
+            if (err) {
+                req.flash('error', 'Something went wrong');
+                return res.redirect('/');
+            }
+            res.render('users/show', {user: foundUser, campgrounds: campgrounds});
+        });
+    })
+});
 
 // ===========
 // Error Routes
