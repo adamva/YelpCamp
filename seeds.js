@@ -17,8 +17,8 @@ async function seedDB() {
         //Wait for pre-existing comments, camgrounds, and dummy user to be deleted from DB
         await Comment.deleteMany({});
         await Campground.deleteMany({});
-        await User.deleteOne({username: 'Oryx'});
-        console.log('Removed campgrounds, comments and dummy user: \'Oryx\'');
+        await User.deleteMany({});
+        console.log('Removed campgrounds, comments and users');
 
         //Add new seeds to DB
         let seedUser = new User({username: 'Oryx', isAdmin: true});

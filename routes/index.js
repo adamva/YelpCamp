@@ -25,7 +25,13 @@ router.get('/register', (req, res) => {
 
 //Handle sign up logic
 router.post('/register', (req, res) => {
-    let newUser = new User({username: req.body.username});
+    let newUser = new User({
+        username: req.body.username,
+        firstName: req.body.firstname,
+        lastName: req.body.lastName,
+        avatar: req.body.avatar,
+        email: req.body.email
+    });
     if(req.user && req.user.isAdmin){
         newUser.isAdmin = true;
     }
