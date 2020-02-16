@@ -26,7 +26,7 @@ async function seedDB() {
             avatar: 'https://images.unsplash.com/photo-1489693755295-4a1efc9e7f72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80',
             firstName: 'Taken',
             lastName: 'King',
-            email: 'sword@logic.org', 
+            email: 'oryx.taken.king.services@gmail.com', 
             isAdmin: true
         });
         

@@ -14,8 +14,7 @@ const   express     = require('express'),
         passport    = require('passport'),
         LocalStrategy = require('passport-local'),
         methodOverride = require('method-override'),
-        User        = require('./models/user'),
-        seedDB      = require('./seeds');
+        User        = require('./models/user');
 
 //Requires for routes
 const   commentRoutes       = require('./routes/comments'),
@@ -57,6 +56,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 
 //Clear database and seed with new data
+// seedDB = require('./seeds')
 // seedDB();
 
 //This is a middleware for EVERY route
