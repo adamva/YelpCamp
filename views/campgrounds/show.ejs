@@ -3,12 +3,18 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-3">           
-            <div class="list-group">
-                <li class="list-group-item active">Info 1</li>
-                <li class="list-group-item">Info 2</li>
-                <li class="list-group-item">Info 3</li>
+            <div id="accordion">
+                <div class="card">
+                    <a class="card-header p-2 bg-dark" data-toggle="collapse" data-target="#collapseMap">
+                        <h6 class="text-light mt-2">View Map</h6>
+                    </a>
+                    <div id="collapseMap" class="collapse" data-parent="#accordion">
+                        <div class="card-body p-0">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="map"></div>
         </div>
         <div class="col-9">
             <div class="card mb-3">
