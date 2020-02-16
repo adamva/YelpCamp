@@ -41,7 +41,7 @@
         </div>
     </nav>
 
-    <div id="flash-notification" class="container">
+    <div id="System Messages" class="container mt-3">
         <% if (error && error.length > 0) { %>
             <div class="alert alert-danger" role="alert">
                 <%= error %>
@@ -51,6 +51,9 @@
             <div class="alert alert-success" role="alert">
                 <%= success %>
             </div>
-        <% } %>        
+        <% } %>
+        <% if(currentUser && currentUser.isAdmin){ %>
+            <h1>Admin View</h1>
+        <% } %>      
     </div>
     

@@ -26,6 +26,9 @@ router.get('/register', (req, res) => {
 //Handle sign up logic
 router.post('/register', (req, res) => {
     let newUser = new User({username: req.body.username});
+    if(req.body.adminCode === 'secretcode123'){
+        newUser.isAdmin = true;
+    }
     User.register(newUser, req.body.password, (err, user) => {
         if (err || process.env.CUR_ENV !== 'local') {
             req.flash('error', 'Opps, something went wrong.'); 
