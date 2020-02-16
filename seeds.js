@@ -21,15 +21,11 @@ async function seedDB() {
         console.log('Removed campgrounds, comments and dummy user: \'Oryx\'');
 
         //Add new seeds to DB
-        let seedUser = new User({username: 'Oryx'});
+        let seedUser = new User({username: 'Oryx', isAdmin: true});
         await User.register(seedUser, 'password');
         console.log('User: \'' + seedUser.username + '\' created');
         
         let author = {id: seedUser._id, username: seedUser.username};
-        let text = '0/10 Would not recommend!!';
-        let newComment = {text: text, author: author}
-        let comment = await Comment.create(newComment);
-        
         for(const seed of seeds) {
             let name = seed.name;
             let price = seed.price;
@@ -42,9 +38,10 @@ async function seedDB() {
             let location = data[0].formattedAddress;
 
             let newCampground = {name: name, price: price, image: image, description: desc, author: author, location: location, lat: lat, lng: lng};
+            let newComment = {text: seed.comment, author: author}
 
             let campground = await Campground.create(newCampground);
-
+            let comment = await Comment.create(newComment);
             campground.comments.push(comment);
             campground.save();
             console.log('Campground: ' + name + ' added to DB');

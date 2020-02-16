@@ -33,6 +33,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Hello <%= currentUser.username %></a>
                     </li>
+                    <% if (currentUser.isAdmin) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register New Admin</a>
+                        </li>
+                    <% } %>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
@@ -41,7 +46,7 @@
         </div>
     </nav>
 
-    <div id="System Messages" class="container mt-3">
+    <div id="System Messages" class="container mt-3 text-center">
         <% if (error && error.length > 0) { %>
             <div class="alert alert-danger" role="alert">
                 <%= error %>
@@ -53,7 +58,7 @@
             </div>
         <% } %>
         <% if(currentUser && currentUser.isAdmin){ %>
-            <h1>Admin View</h1>
+            <h1 class="bg-warning rounded">Admin View</h1>
         <% } %>      
     </div>
     
