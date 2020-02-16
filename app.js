@@ -19,6 +19,8 @@ const   express     = require('express'),
 //Requires for routes
 const   commentRoutes       = require('./routes/comments'),
         campgroundRoutes    = require('./routes/campgrounds'),
+        userRoutes          = require('./routes/user'),
+        passwordRoutes      = require('./routes/password'),
         indexRoutes         = require('./routes/index');
 
 const connectionString = process.env.DB_URL;
@@ -70,6 +72,8 @@ app.use((req, res, next) => {
 //ORDER MATTERS WHEN app.use() ROUTES
 app.use('/campgrounds', campgroundRoutes); //'/campgrounds' is a prefix that can be appened to the routes in campgroundsRoutes
 app.use('/campgrounds/:id/comments', commentRoutes);
+app.use(passwordRoutes);
+app.use(userRoutes);
 app.use(indexRoutes);
 
 //Express listening for connections
