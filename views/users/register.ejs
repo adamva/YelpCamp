@@ -1,44 +1,54 @@
 <%- include("../partials/header") %>
 
-<div class="row m-0">
-    <div class="col-md-12 p-0 mt-5">
-        <form class="form-signin" action="/register" method="POST">
-            <% if (currentUser && currentUser.isAdmin) { %>
-                <h1 class="h3 mb-3 font-weight-normal">Sign Up New Admin</h1>
-            <% } else { %>
-                <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
-            <% } %>            
-            <div class="form-group">
-                <label for="inputUsername" class="sr-only">Username</label>
-                <input type="text" id="inputUsername" class="form-control" name="username" placeholder="Username" required autofocus>
+<div class="row m-0 flex-grow-1">
+    <div class="d-none d-md-flex col-sm-6 bg-img"></div>
+
+    <div class="col-md-6 bg-light align-items-center">
+        <div class="h-100 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-7 mx-auto">
+                        <% if (currentUser && currentUser.isAdmin) { %>
+                            <h3 class="display-4">Sign Up New Admin</h1>
+                        <% } else { %>
+                            <h3 class="display-4">Sign Up</h1>
+                        <% } %>            
+                        <form class="form-signin" action="/register" method="POST">
+                            <div class="form-group">
+                                <label for="inputUsername" class="sr-only">Username</label>
+                                <input type="text" id="inputUsername" class="form-control rounded-pill border-1" name="username" placeholder="Username" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="sr-only">Password</label>
+                                <input type="password" id="inputPassword" class="form-control rounded-pill border-1" name="password" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputFirstname" class="sr-only">First Name</label>
+                                <input type="text" id="inputFirstname" class="form-control rounded-pill border-1" name="firstName" placeholder="First Name" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLastName" class="sr-only">Last Name</label>
+                                <input type="text" id="inputLastName" class="form-control rounded-pill border-1" name="lastName" placeholder="Last Name" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="sr-only">Email</label>
+                                <input type="email" id="inputEmail" class="form-control rounded-pill border-1" name="email" placeholder="your@email.com" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAvatar" class="sr-only">Avatar URL</label>
+                                <input type="text" id="inputAvatar" class="form-control rounded-pill border-1" name="avatar" placeholder="avatar url" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-lg btn-primary btn-block rounded-pill" type="submit">Sign Up!</button> 
+                            </div>
+                            <div class="form-group">
+                                <a href="/login">Already registered? Login!</a>
+                            </div>        
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="inputFirstname" class="sr-only">First Name</label>
-                <input type="text" id="inputFirstname" class="form-control" name="firstName" placeholder="First Name" autofocus>
-            </div>
-            <div class="form-group">
-                <label for="inputLastName" class="sr-only">Last Name</label>
-                <input type="text" id="inputLastName" class="form-control" name="lastName" placeholder="Last Name" autofocus>
-            </div>
-            <div class="form-group">
-                <label for="inputEmail" class="sr-only">Email</label>
-                <input type="email" id="inputEmail" class="form-control" name="email" placeholder="your@email.com" autofocus>
-            </div>
-            <div class="form-group">
-                <label for="inputAvatar" class="sr-only">Avatar URL</label>
-                <input type="text" id="inputAvatar" class="form-control" name="avatar" placeholder="avatar url" autofocus>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up!</button> 
-            </div>
-            <div class="form-group">
-                <a href="/login">Already have an account? Login!</a>
-            </div>        
-        </form>
+        </div>
     </div>
 </div>
 
