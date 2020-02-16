@@ -58,7 +58,7 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', //.authenticate acts as a middleware and will check if a user logged in with the correct login info
     {
         successRedirect: '/campgrounds',
-        successFlash: 'Welcome!',
+        successFlash: 'Logged in. Welcome!',
         failureRedirect: '/login',
         failureFlash: 'Invalid username or password.'
     })
