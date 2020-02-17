@@ -2,31 +2,7 @@ const   express     = require('express'),
         Campground  = require('../models/campground'),
         Comment     = require('../models/comment'),
         middleware  = require('../middleware'),
-        request     = require('request'),
-        NodeGeocoder = require('node-geocoder');
-
-const GMapAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=Edmonton&key=' + process.env.GEOCODER_API_KEY;
-const quotaOptions = {
-    proxy: process.env.QUOTAGUARDSTATIC_URL,
-    url: GMapAPI,
-};
-
-request(quotaOptions, (err, res, body) => {
-    if(!err && res.statusCode == 200){
-        console.log('Hey, I went to google!');
-    } else{
-        console.log(err);
-    }
-});
-
-const geoOptions = {
-  provider: 'google',
-  httpAdapter: 'https',
-  apiKey: process.env.GEOCODER_API_KEY,
-  formatter: null
-};
- 
-const geocoder = NodeGeocoder(geoOptions);
+        geocode     = require('../middleware/geocoder');
 
 //This adds any routes we make to the router variable then we export it for use in app.js
 const router = express.Router();
@@ -61,22 +37,22 @@ router.post('/', middleware.isLoggedIn, function (req, res) {
         id: req.user._id,
         username: req.user.username
     };
-    geocoder.geocode(req.body.location, function (err, data) {
-        if (err || !data.length) {
-          req.flash('error', 'Invalid address');
-          return res.redirect('back');
+    geocode.geocode(req.body.location, (data) => {
+        if(!data.length){
+            req.flash('error', 'Invalid address');
+            return res.redirect('back');
         }
-        let lat = data[0].latitude;
-        let lng = data[0].longitude;
-        let location = data[0].formattedAddress;
+        let location = data[0].formatted_address;
+        let lat = data[0].geometry.location.lat;
+        let lng = data[0].geometry.location.lng;
         let newCampground = {name: name, price: price, image: image, description: desc, author:author, location: location, lat: lat, lng: lng};
-        // Create a new campground and save to DB
         Campground.create(newCampground, function(err, newlyCreated){
-            if(err){
-                console.log(err);
+            if(err || !newlyCreated){
+                req.flash('error', 'Opps, something went wrong.')
+                return res.redirect('back');
             } else {
-                //redirect back to campgrounds page
-                res.redirect("/campgrounds");
+                req.flash('success', 'Success! New campground added.')
+                res.redirect("/campgrounds/" + newlyCreated.id);
             }
         });
     });
@@ -92,7 +68,7 @@ router.get('/:id', function(req, res){
             res.redirect('back');
         } else {
             //Render show template with that campground
-            res.render('campgrounds/show', {campground: foundCampground, GMapAPI: process.env.GEOCODER_API_KEY});
+            res.render('campgrounds/show', {campground: foundCampground, GMapAPI: process.env.GMAPS_API_KEY});
         }
     });
 });
@@ -112,15 +88,16 @@ router.get('/:id/edit', middleware.checkCampgroundOwnership, (req, res) => {
 
 //UPDATE Campground Route
 router.put('/:id/', middleware.checkCampgroundOwnership, (req, res) => {
-    geocoder.geocode(req.body.campground.location, function (err, data) {
-        if (err || !data.length) {
+    geocode.geocode(req.body.campground.location, function (data) {
+        if (!data.length) {
           req.flash('error', 'Invalid address');
           console.log(err);
           return res.redirect('back');
         }
-        req.body.campground.lat = data[0].latitude;
-        req.body.campground.lng = data[0].longitude;
-        req.body.campground.location = data[0].formattedAddress;
+
+        req.body.campground.lat = data[0].geometry.location.lat;
+        req.body.campground.lng = data[0].geometry.location.lng;
+        req.body.campground.location = data[0].formatted_address;
 
         Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground){
             if(err){
