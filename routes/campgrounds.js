@@ -2,16 +2,31 @@ const   express     = require('express'),
         Campground  = require('../models/campground'),
         Comment     = require('../models/comment'),
         middleware  = require('../middleware'),
+        request     = require('request'),
         NodeGeocoder = require('node-geocoder');
- 
-const options = {
+
+const GMapAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=Edmonton&key=' + process.env.GEOCODER_API_KEY;
+const quotaOptions = {
+    proxy: process.env.QUOTAGUARDSTATIC_URL,
+    url: GMapAPI,
+};
+
+request(quotaOptions, (err, res, body) => {
+    if(!err && res.statusCode == 200){
+        console.log('Hey, I went to google!');
+    } else{
+        console.log(err);
+    }
+});
+
+const geoOptions = {
   provider: 'google',
   httpAdapter: 'https',
   apiKey: process.env.GEOCODER_API_KEY,
   formatter: null
 };
  
-const geocoder = NodeGeocoder(options);
+const geocoder = NodeGeocoder(geoOptions);
 
 //This adds any routes we make to the router variable then we export it for use in app.js
 const router = express.Router();
@@ -49,7 +64,6 @@ router.post('/', middleware.isLoggedIn, function (req, res) {
     geocoder.geocode(req.body.location, function (err, data) {
         if (err || !data.length) {
           req.flash('error', 'Invalid address');
-          console.log(err)
           return res.redirect('back');
         }
         let lat = data[0].latitude;
