@@ -1,9 +1,9 @@
 <%- include("../partials/header") %>
 
 <div class="row m-0 flex-grow-1">
-    <div class="d-none d-md-flex col-sm-6 bg-img"></div>
+    <div class="d-none d-lg-flex col-sm-6 bg-img-register"></div>
 
-    <div class="col-md-6 bg-light align-items-center">
+    <div class="col-lg-6 bg-light align-items-center">
         <div class="h-100 d-flex align-items-center">
             <div class="container">
                 <div class="row">
@@ -12,7 +12,8 @@
                             <h3 class="display-4">Sign Up New Admin</h1>
                         <% } else { %>
                             <h3 class="display-4">Sign Up</h1>
-                        <% } %>            
+                        <% } %>
+                        <hr class="my-4">            
                         <form class="form-signin" action="/register" method="POST">
                             <div class="form-group">
                                 <label for="inputUsername" class="sr-only">Username</label>

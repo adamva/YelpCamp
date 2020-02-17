@@ -17,13 +17,13 @@
             <h3>Our Most Popular Campgrounds</h2>
         </div>
         <div class="card-columns">
-            <% campgrounds.forEach(function(campgrounds){ %>
+            <% campgrounds.forEach(function(campground){ %>
                 <div class="col">
                     <div class="card">
-                        <img src="<%= campgrounds.image %>" class="card-img-top" alt="<%= campgrounds.name %>">
+                        <img src="<%= campground.image %>" class="card-img-top" alt="<%= campground.name %>">
                         <div class="card-body">
-                            <h5 class="card-title"><%= campgrounds.name %></h5>
-                            <a href="/campgrounds/<%= campgrounds._id %>" class="btn btn-primary">More Info</a>
+                            <h5 class="card-title"><%= campground.name %></h5>
+                            <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>
                         </div>
                     </div>
                 </div>

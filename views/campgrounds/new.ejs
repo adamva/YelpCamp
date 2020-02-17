@@ -1,14 +1,15 @@
 <%- include("../partials/header") %>
 
 <div class="row m-0 flex-grow-1">
-    <div class="d-none d-md-flex col-sm-6 bg-img"></div>
+    <div class="d-none d-lg-flex col-sm-6 bg-img-new"></div>
 
-    <div class="col-md-6 bg-light align-items-center">
+    <div class="col-lg-6 bg-light align-items-center">
         <div class="h-100 d-flex align-items-center">
             <div class="container">
                 <div class="row">
                     <div class="col-7 mx-auto">
                         <h3 class="display-4">New Campground</h3>
+                        <hr class="my-4">
                         <form action="/campgrounds" method="POST">
                             <div class="form-group">
                                 <label for="name" class="sr-only">Name</label>
@@ -38,9 +39,12 @@
                             <div class="form-group">
                                 <button class="btn btn-lg btn-primary btn-block rounded-pill">Submit!</button>
                             </div>
+
+                            <div class="formgroup">
+                                <a href="/campgrounds">Go Back</a>
+                            </div>
                         </form>
                         
-                        <a href="/campgrounds">Go Back</a>
                     </div>
                 </div>
             </div>
