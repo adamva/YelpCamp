@@ -46,19 +46,21 @@
         </div>
     </nav>
 
-    <div id="System Messages" class="container text-center">
-        <% if (error && error.length > 0) { %>
-            <div class="alert alert-danger mt-2" role="alert">
-                <%= error %>
-            </div>
-        <% } %>
-        <% if (success && success.length > 0) { %>
-            <div class="alert alert-success mt-2" role="alert">
-                <%= success %>
-            </div>
-        <% } %>
-        <% if(currentUser && currentUser.isAdmin){ %>
-            <h1 class="bg-warning rounded mt-2">Admin Mode</h1>
-        <% } %>      
+    <div id="system-msg" class="container text-center mt-5">
+        <div class="row mx-0 justify-content-center">
+            <% if (error && error.length > 0) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+            <% if (success && success.length > 0) { %>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>
+            <% if(currentUser && currentUser.isAdmin){ %>
+                <h1 class="bg-warning rounded">Admin Mode</h1>
+            <% } %>      
+        </div>
     </div>
     
