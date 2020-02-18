@@ -10,6 +10,7 @@ const campgroundSchema = new mongoose.Schema({
     location: String,
     lat: Number,
     lng: Number,
+    createdAt: {type: Date, default: Date.now},
     author: {
         //When associating a model to another model you need to specify the id of the associated model
         id: {

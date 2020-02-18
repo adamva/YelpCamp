@@ -5,10 +5,11 @@
             <img src="<%= user.avatar %>" class="card-img-top" alt="user profile image">
             <div class="card-body">
                 <h1 class="card-title text-capitalize"><%= user.firstName + ' ' +  user.lastName%></h1>
-                <p class="card-text"><%= user.email %> </p>
-                <p class="card-text">
+                <p class="card-subtitle text-muted mb-4 font-weight-lighter font-italic"><%= user.email %> </p>
+                <p class="card-text mb-5">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, dignissimos velit. Mollitia suscipit aliquam velit dolore vel molestiae, consequatur nihil cum possimus officia quae corporis iure. Non voluptate reprehenderit dignissimos deleniti ullam eos nostrum modi error ratione nemo laudantium facere id nisi delectus consequuntur nulla, molestias blanditiis quasi architecto excepturi.
                 </p>
+                <p class="card-subtitle float-right"><%= user.username %> joined YelpCamp <%= moment(user.createdAt).fromNow() %></p>
             </div>
         </div>
     </div>
