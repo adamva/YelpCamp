@@ -12,7 +12,7 @@ const router = express.Router();
 
 //Forgot passwrod
 router.get('/forgot', (req, res) => {
-    res.render('users/forgot');
+    return res.render('users/forgot');
 });
 
 //Handle forgot password logic
@@ -67,7 +67,7 @@ router.post('/forgot', (req, res, next) => {
         if(err){
             return next(err);
         }
-        res.redirect('/forgot');
+        return res.redirect('/forgot');
     });
 });
 
@@ -82,7 +82,7 @@ router.get('/reset/:token', (req, res) => {
             req.flash('error', 'Password reset token is invalid or has expired.');
             return res.redirect('/forgot');
         } else {
-            res.render('users/reset', {token: req.params.token});
+            return res.render('users/reset', {token: req.params.token});
         }
     });
 });
@@ -136,7 +136,7 @@ router.post('/reset/:token', (req, res) => {
             });
         }
     ], function(err){
-        res.redirect('/campgrounds');
+        return res.redirect('/campgrounds');
     });
 });
 

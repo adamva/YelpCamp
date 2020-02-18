@@ -14,16 +14,16 @@ router.get('/', function (req, res) {
         if (err) {
             req.flash('error', 'Something went wrong.');
             console.log(err.message);
-            res.redirect('back');
+            return res.redirect('back');
         } else {
-            res.render('campgrounds/index', {campgrounds: allCampgrounds});
+            return res.render('campgrounds/index', {campgrounds: allCampgrounds});
         }
     });    
 });
 
 //NEW - Show new campground form
 router.get('/new', middleware.isLoggedIn, function (req, res) {
-    res.render('campgrounds/new');
+    return res.render('campgrounds/new');
 });
 
 //CREATE - Add new campground to DB
@@ -52,7 +52,7 @@ router.post('/', middleware.isLoggedIn, function (req, res) {
                 return res.redirect('back');
             } else {
                 req.flash('success', 'Success! New campground added.')
-                res.redirect("/campgrounds/" + newlyCreated.id);
+                return res.redirect("/campgrounds/" + newlyCreated.id);
             }
         });
     });
@@ -65,10 +65,10 @@ router.get('/:id', function(req, res){
     Campground.findById(req.params.id).populate('comments').exec(function (err, foundCampground) {
         if (err || !foundCampground) {
             req.flash('error', 'Campground not found');
-            res.redirect('back');
+            return res.redirect('back');
         } else {
             //Render show template with that campground
-            res.render('campgrounds/show', {campground: foundCampground, GMapAPI: process.env.GMAPS_API_KEY});
+            return res.render('campgrounds/show', {campground: foundCampground, GMapAPI: process.env.GMAPS_API_KEY});
         }
     });
 });
@@ -79,9 +79,9 @@ router.get('/:id/edit', middleware.checkCampgroundOwnership, (req, res) => {
         if (err) {
             req.flash('error', 'Something went wrong.');
             console.log(err.message);
-            res.redirect('back');
+            return res.redirect('back');
         } else {
-            res.render('campgrounds/edit', {campground: foundCampground});
+            return res.render('campgrounds/edit', {campground: foundCampground});
         }        
     });       
 });
@@ -102,10 +102,10 @@ router.put('/:id/', middleware.checkCampgroundOwnership, (req, res) => {
         Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground){
             if(err){
                 req.flash("error", err.message);
-                res.redirect("back");
+                return res.redirect("back");
             } else {
                 req.flash("success","Successfully Updated!");
-                res.redirect("/campgrounds/" + campground._id);
+                return res.redirect("/campgrounds/" + campground._id);
             }
         });
     });
@@ -118,7 +118,7 @@ router.delete('/:id', middleware.checkCampgroundOwnership, (req, res) => {
         if (err || !deletedCampground) {
             req.flash('error', 'Something went wrong.');
             console.log(err.message);
-            res.redirect('back');
+            return res.redirect('back');
         } else {
             //Delete any associated comments with deletedCampground
             deletedCampground.comments.forEach((comment) => {
@@ -126,12 +126,12 @@ router.delete('/:id', middleware.checkCampgroundOwnership, (req, res) => {
                     if (err) {
                         req.flash('error', 'Something went wrong.');
                         console.log(err.message);
-                        res.redirect('back');
+                        return res.redirect('back');
                     }
                 });
             });
             req.flash('success', 'Campground removed.')
-            res.redirect('/campgrounds');            
+            return res.redirect('/campgrounds');            
         }
     });
 });

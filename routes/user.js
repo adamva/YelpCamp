@@ -51,7 +51,7 @@ router.post('/register', (req, res) => {
 
 //Show login form
 router.get('/login', (req, res) => {
-    res.render('users/login');
+    return res.render('users/login');
 });
 
 //Check login credentials
@@ -68,7 +68,7 @@ router.post('/login', passport.authenticate('local', //.authenticate acts as a m
 router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success', 'Logged Out');
-    res.redirect('/campgrounds');
+    return res.redirect('/campgrounds');
 });
 
 // ===========

@@ -14,15 +14,15 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
             //does user own campground?
             } else if(foundCampground.author.id.equals(req.user._id) || req.user.isAdmin){
                 //.equals is because .id is an object while ._id is a string
-                next();
+                return next();
             } else {
                 req.flash('error', 'Permission denied.'); 
-                res.redirect('back');
+                return res.redirect('back');
             }
         }); 
     } else {
         req.flash('error', 'You need to be logged in to do that.');
-        res.redirect('back');
+        return res.redirect('back');
     }
 };
 
@@ -36,16 +36,16 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
             } else {
                 //does user own comment?
                 if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
-                    next();
+                    return next();
                 } else {
                     req.flash('error', 'Permission denied.'); 
-                    res.redirect('back');
+                    return res.redirect('back');
                 }                   
             }
         }); 
     } else {
         req.flash('error', 'You need to be logged in to do that.'); 
-        res.redirect('/back');
+        return res.redirect('/back');
     }
 };
 
@@ -54,7 +54,7 @@ middlewareObj.isLoggedIn = function(req, res, next) {
         return next();
     } else {
         req.flash('error', 'You need to be logged in to do that.');
-        res.redirect('/login');
+        return res.redirect('/login');
     }
 };
 
