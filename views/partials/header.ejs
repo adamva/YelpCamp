@@ -10,59 +10,60 @@
     <title>YelpCamp</title>
 </head>
 <body>
-    <% if(currentUser && currentUser.isAdmin){ %>
-        <nav class="navbar navbar-expand-md navbar-light bg-warning">
-            <h1 class="navbar-brand mb-0" href="/">Admin</h1>
-    <% } else { %>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <% } %> 
-        <a class="navbar-brand" href="/">YelpCamp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/campgrounds">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            <ul class="navbar-nav navbar-right">
-                <% if(!currentUser){ %>
+    <div class="wrapper">
+        <% if(currentUser && currentUser.isAdmin){ %>
+            <nav class="navbar navbar-expand-md navbar-light bg-warning">
+                <h1 class="navbar-brand mb-0" href="/">Admin</h1>
+        <% } else { %>
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <% } %> 
+            <a class="navbar-brand" href="/">YelpCamp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/campgrounds">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
-                    </li>
-                <% } else { %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users/<%= currentUser._id %>"><%= currentUser.username %></a>
-                    </li>
-                    <% if (currentUser.isAdmin) { %>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+                    <% if(!currentUser){ %>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">Register New Admin</a>
+                            <a class="nav-link" href="/login">Login</a>
                         </li>
-                    <% } %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                <% } %>                 
-            </ul>
-        </div>
-    </nav>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/<%= currentUser._id %>"><%= currentUser.username %></a>
+                        </li>
+                        <% if (currentUser.isAdmin) { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Register New Admin</a>
+                            </li>
+                        <% } %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    <% } %>                 
+                </ul>
+            </div>
+        </nav>
 
-    <div id="system-msg" class="container text-center mt-5">
-        <div class="row mx-0 justify-content-center">
-            <% if (error && error.length > 0) { %>
-                <div class="alert alert-danger" role="alert">
-                    <%= error %>
-                </div>
-            <% } %>
-            <% if (success && success.length > 0) { %>
-                <div class="alert alert-success" role="alert">
-                    <%= success %>
-                </div>
-            <% } %>    
+        <div id="system-msg" class="container text-center mt-5">
+            <div class="row mx-0 justify-content-center">
+                <% if (error && error.length > 0) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <% if (success && success.length > 0) { %>
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                <% } %>    
+            </div>
         </div>
-    </div>
     
