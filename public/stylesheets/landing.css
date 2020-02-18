@@ -1,9 +1,84 @@
-body{
-    background: url(../images/carousel_img_1.jpg);
-    background-size: cover;
-    background-position: center;
+@keyframes imageAnimation{
+    0% { 
+        opacity: 0; 
+        animation-timing-function: ease-in;
+    }
+    10% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+    20% {
+        opacity: 1
+    }
+    30% {
+        opacity: 0
+    }
 }
 
-.content{
-    text-shadow: rgba(0, 0, 0, 0.39) 1px 1px;
+.wrapper{
+    background-color: black;
+}
+
+.slideshow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.slideshow li { 
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 50s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+    background-image: url(http://i.imgur.com/K3mPv14.jpg); 
+}
+.slideshow li:nth-child(2) { 
+    background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+    animation-delay: 10s; 
+}
+.slideshow li:nth-child(3) { 
+    background-image: url(http://i.imgur.com/emvhOnb.jpg);
+    animation-delay: 20s; 
+}
+.slideshow li:nth-child(4) { 
+    background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+    animation-delay: 30s; 
+}
+.slideshow li:nth-child(5) { 
+    background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+    animation-delay: 40s; 
+}
+
+.row{
+    z-index: 2;
+}
+.jumbotron{
+    background-color: rgba(145, 173, 189, 0.904);
+    position: relative;
+    color: white;
+}
+
+nav{
+    position: relative;
+    z-index: 2;
+}
+footer{
+    position: relative;
+    z-index: 2;
 }
