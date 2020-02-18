@@ -49,6 +49,15 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
     }
 };
 
+middlewareObj.isProduction = function(req, res, next){
+    if(process.env.CUR_ENV !== 'local'){
+        req.flash('error', 'Sorry, that feature has been disabled.');
+        return res.redirect('back');
+    } else {
+        return next();
+    }
+};
+
 middlewareObj.isLoggedIn = function(req, res, next) {
     if(req.isAuthenticated()){
         return next();

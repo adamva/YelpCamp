@@ -1,7 +1,8 @@
 const   express     = require('express'),
         passport    = require('passport'),
         User        = require('../models/user')
-        Campground  = require('../models/campground');;
+        Campground  = require('../models/campground'),
+        middleware  = require('../middleware');
 
 const router = express.Router();
 
@@ -10,17 +11,12 @@ const router = express.Router();
 // ===========
 
 //Show register form
-router.get('/register', (req, res) => {
-    if (process.env.CUR_ENV !== 'local') {
-        req.flash('error', 'Sorry. That feature has been disabled.'); 
-        return res.redirect('/');
-    } else {
-        res.render('users/register');
-    }    
+router.get('/register', middleware.isProduction, (req, res) => {
+    return res.render('users/register');
 });
 
 //Handle register logic
-router.post('/register', (req, res) => {
+router.post('/register', middleware.isProduction, (req, res) => {
     let newUser = new User({
         username: req.body.username,
         firstName: req.body.firstName,
@@ -32,8 +28,8 @@ router.post('/register', (req, res) => {
         newUser.isAdmin = true;
     }
     User.register(newUser, req.body.password, (err, user) => {
-        if (err || process.env.CUR_ENV !== 'local') {
-            req.flash('error', 'Opps, something went wrong.'); 
+        if (err) {
+            req.flash('error', err.message); 
             return res.redirect('/register');
         } else{
             //after creating new user, log them in
