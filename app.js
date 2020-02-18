@@ -38,6 +38,9 @@ mongoose.connect(connectionString, {
 //Flash Config
 app.use(flash());
 
+//Moment Config (Its for posting times for new campgrounds, comments, etc.)
+app.locals.moment = require('moment');
+
 //Passport Config
 app.use(require('express-session')({
     secret: 'This is my first website with Colt Steele\'s WebDev Bootcamp',
