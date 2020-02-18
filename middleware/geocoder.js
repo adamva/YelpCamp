@@ -15,14 +15,14 @@ const instance = axios.create({
     }
 });
 
-geocode.geocode = function(location, next){
+geocode.geocode = function(location, callback){
     instance.request({
         params: {
             address: location,
             key: process.env.GEOCODER_API_KEY
         }
     }).then((response) => {
-        next(response.data.results);
+        callback(response.data.results);
 
     }).catch((error) => {
         if (error.response) {
@@ -38,6 +38,22 @@ geocode.geocode = function(location, next){
         }
         console.log(error.config);
     });
+}
+
+geocode.geocode2 = function(location){
+    return new Promise((resolve, reject) => {
+        instance.request({
+            params: {
+                address: location,
+                key: process.env.GEOCODER_API_KEY
+            }
+        }).then((response) => {
+            resolve(response.data.results);
+        }).catch((error) => {
+            console.log(error);
+            reject;
+        })
+    })
 }
 
 module.exports = geocode;
