@@ -58,7 +58,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 
 //Clear database and seed with new data
-// const seedDB = require('./seeds');
+// const seedDB = require('./seed');
 // seedDB();
 
 //This is a middleware for EVERY route
