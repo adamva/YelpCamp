@@ -28,14 +28,13 @@ geocode.geocode = function(location, callback){
         if (error.response) {
             console.log('Error: Google responsed with status code outside of 200');
             console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
         } else if(error.request){
             console.log('Error: No response');
             console.log(error.request);
         } else{
             console.log('Error', error.message);
         }
+        console.log('Config of request');
         console.log(error.config);
     });
 }
@@ -50,7 +49,7 @@ geocode.geocode2 = function(location){
         }).then((response) => {
             resolve(response.data.results);
         }).catch((error) => {
-            console.log(error);
+            console.log(error.error_message);
             reject;
         })
     })
