@@ -10,7 +10,12 @@
     <title>YelpCamp</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <% if(currentUser && currentUser.isAdmin){ %>
+        <nav class="navbar navbar-expand-md navbar-light bg-warning">
+            <h1 class="navbar-brand mb-0" href="/">Admin</h1>
+    <% } else { %>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <% } %> 
         <a class="navbar-brand" href="/">YelpCamp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,10 +62,7 @@
                 <div class="alert alert-success" role="alert">
                     <%= success %>
                 </div>
-            <% } %>
-            <% if(currentUser && currentUser.isAdmin){ %>
-                <h1 class="bg-warning rounded">Admin Mode</h1>
-            <% } %>      
+            <% } %>    
         </div>
     </div>
     
