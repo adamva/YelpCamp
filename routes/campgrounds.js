@@ -22,7 +22,7 @@ const imageFilter = function (req, file, cb) {
     cb(null, true);
 };
 
-const upload = multer({ storage: storage, fileFilter: imageFilter})
+const upload = multer({ storage: storage, fileFilter: imageFilter, limits:{fileSize: 500000}}).single('image');
 
 //Cloudinar Config
 cloudinary.config({ 
@@ -54,35 +54,41 @@ router.get('/new', middleware.isLoggedIn, function (req, res) {
 });
 
 //CREATE - Add new campground to DB
-router.post('/', middleware.isLoggedIn, upload.single('image'), function (req, res) {
-    //Upload image and save cloud address to campground.image
-    cloudinary.v2.uploader.upload(req.file.path, (err, result) => {
-        if(err){
+router.post('/', middleware.isLoggedIn, function (req, res) {
+    upload(req, res, (err) => {
+        if (err) {
             req.flash('error', err.message)
             return res.redirect('back');
         }
-        req.body.campground.image = result.secure_url;
-        req.body.campground.imageId = result.public_id;
-        req.body.campground.author = {id: req.user._id, username: req.user.username};
-        
-        //Use google API to find location of campground
-        geocode.geocode(req.body.campground.location, (data) => {
-            if(!data.length){
-                req.flash('error', 'Invalid address');
+        //Upload image and save cloud address to campground.image
+        cloudinary.v2.uploader.upload(req.file.path, (err, result) => {
+            if(err){
+                req.flash('error', err.message)
                 return res.redirect('back');
             }
-            req.body.campground.location = data[0].formatted_address;
-            req.body.campground.lat = data[0].geometry.location.lat;
-            req.body.campground.lng = data[0].geometry.location.lng;
-    
-            Campground.create(req.body.campground, function(err, newCampground){
-                if(err || !newCampground){
-                    req.flash('error', 'Opps, something went wrong.');
+            req.body.campground.image = result.secure_url;
+            req.body.campground.imageId = result.public_id;
+            req.body.campground.author = {id: req.user._id, username: req.user.username};
+            
+            //Use google API to find location of campground
+            geocode.geocode(req.body.campground.location, (data) => {
+                if(!data.length){
+                    req.flash('error', 'Invalid address');
                     return res.redirect('back');
-                } else {
-                    req.flash('success', 'Success! New campground added.')
-                    return res.redirect("/campgrounds/" + newCampground.id);
                 }
+                req.body.campground.location = data[0].formatted_address;
+                req.body.campground.lat = data[0].geometry.location.lat;
+                req.body.campground.lng = data[0].geometry.location.lng;
+        
+                Campground.create(req.body.campground, function(err, newCampground){
+                    if(err || !newCampground){
+                        req.flash('error', 'Opps, something went wrong.');
+                        return res.redirect('back');
+                    } else {
+                        req.flash('success', 'Success! New campground added.')
+                        return res.redirect("/campgrounds/" + newCampground.id);
+                    }
+                });
             });
         });
     });
@@ -117,10 +123,11 @@ router.get('/:id/edit', middleware.checkCampgroundOwnership, (req, res) => {
 });
 
 //UPDATE Campground Route
-router.put('/:id/', upload.single('image'), middleware.checkCampgroundOwnership, async (req, res) => {
+router.put('/:id/', middleware.checkCampgroundOwnership, async (req, res) => {
     try {
         let campground = await Campground.findById(req.params.id);
         if (req.file){
+            await upload(req, res)
             await cloudinary.v2.uploader.destroy(campground.imageId); 
             let result = await cloudinary.v2.uploader.upload(req.file.path);
             campground.image = result.secure_url;
