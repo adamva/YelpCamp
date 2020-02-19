@@ -31,21 +31,22 @@ router.get('/new', middleware.isLoggedIn, function (req, res) {
 //CREATE - Add new campground to DB
 router.post('/', middleware.isLoggedIn, upload.single, async function (req, res) {
     try {
-        let result = await cloudinary.uploads(req.file.path, 'YelpCamp');
-        req.body.campground.image = result.url;
-        req.body.campground.imageId = result. publicId;
-
-        req.body.campground.author = {id: req.user._id, username: req.user.username};
         let data = await geocode.geocode2(req.body.campground.location);
-
         if (!data.length){
             req.flash('error', 'Invalid address');
             return res.redirect('back');
         }
+        let result = await cloudinary.uploads(req.file.path, process.env.CLOUDINARY_MEDIA_FOLDER);
+
         req.body.campground.lat = data[0].geometry.location.lat;
         req.body.campground.lng = data[0].geometry.location.lng;
         req.body.campground.location = data[0].formatted_address;
 
+        req.body.campground.image = result.url;
+        req.body.campground.imageId = result. publicId;
+        
+        req.body.campground.author = {id: req.user._id, username: req.user.username};
+        
         let newCampground = await Campground.create(req.body.campground);
 
         req.flash("success","New campground added!");
@@ -91,7 +92,7 @@ router.put('/:id/', middleware.checkCampgroundOwnership, upload.single, async (r
         let campground = await Campground.findById(req.params.id);
         if(req.file){
             await cloudinary.destroy(campground.imageId)
-            let result = await cloudinary.uploads(req.file.path, 'YelpCamp');
+            let result = await cloudinary.uploads(req.file.path, process.env.CLOUDINARY_MEDIA_FOLDER);
             campground.image = result.url;
             campground.imageId = result. publicId; 
         }
