@@ -15,7 +15,7 @@
                         <h3 class="display-4">Edit <%= campground.name %> </h3>
                         <hr class="my-4">
                         <!-- notice that for editing forms you need to use method-override in the action where you end with '?_method=PUT' -->
-                        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
+                        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="name" class="sr-only">Name</label>
                                 <input class="form-control rounded-pill border-1" type="text" name="campground[name]" id="name" value="<%= campground.name %>" required autofocus>
@@ -25,10 +25,11 @@
                                 <label for="price" class="sr-only">Price</label>
                                 <input class="form-control rounded-pill border-1" type="number" name="campground[price]" id="price" value="<%= campground.price %>" min="0" step="0.01" required autofocus>
                             </div>
-
-                            <div class="form-group">
-                                <label for="image" class="sr-only">Image</label>
-                                <input class="form-control rounded-pill border-1" type="text" name="campground[image]" id="image" value="<%= campground.image %>" required autofocus>
+                            
+                            <div class="input-group mb-3 rounded-pill bg-white border">
+                                <label for="price" class="sr-only">Upload Image</label>
+                                <label for="image" class="text-secondary mb-0 mt-2 ml-2"><i class="fa fa-cloud-upload mr-2 text-muted"></i>Upload Image</label>
+                                <input class="form-control border-1" type="file" name="image" id="image" accept="image/*" autofocus>
                             </div>
 
                             <div class="form-group">
