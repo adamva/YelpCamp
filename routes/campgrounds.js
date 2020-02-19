@@ -7,11 +7,11 @@ const   express     = require('express'),
         cloudinary  = require('cloudinary');
 
 //Multer Config
-//This is to make is saved images have a name of the date uploaded + original name
+//This is to upload images and save them with a name of date uploaded + original name
 const storage = multer.diskStorage({
-  filename: function(req, file, callback) {
-    callback(null, Date.now() + file.originalname);
-  }
+    filename: function(req, file, callback) {
+        callback(null, Date.now() + file.originalname);
+    }
 });
 
 const imageFilter = function (req, file, cb) {
@@ -29,7 +29,7 @@ cloudinary.config({
     cloud_name: 'adamva-personal-projects', 
     api_key: process.env.CLOUDINARY_API_KEY, 
     api_secret: process.env.CLOUDINARY_API_SECRET
-});;
+});
 
 //This adds any routes we make to the router variable then we export it for use in app.js
 const router = express.Router();
