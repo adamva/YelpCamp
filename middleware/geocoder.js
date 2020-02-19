@@ -49,8 +49,7 @@ geocode.geocode2 = function(location){
         }).then((response) => {
             resolve(response.data.results);
         }).catch((error) => {
-            console.log(error.error_message);
-            reject;
+            reject(error);
         })
     })
 }
