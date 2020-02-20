@@ -28,7 +28,7 @@
                             
                             <div class="input-group mb-3 rounded-pill bg-white border form-check-inline">
                                 <label for="price" class="sr-only">Upload Image</label>
-                                <label for="image" class="text-secondary mb-0 mt-2 ml-2"><i class="fa fa-cloud-upload mr-2 text-muted"></i>Upload Image</label>
+                                <label for="image" class="text-secondary mb-0 mt-2 ml-2"><i class="fa fa-cloud-upload mr-2 text-muted"></i><span id="imageLabel">Upload Image</span></label>
                                 <input class="form-control border-1" type="file" name="image" id="image" accept="image/*" autofocus>
                             </div>
 
@@ -56,3 +56,4 @@
 </div>
 
 <%- include("../partials/footer") %>
+<script src="/scripts/showImage.js"></script>
