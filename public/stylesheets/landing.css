@@ -69,7 +69,7 @@
     z-index: 2;
 }
 .jumbotron{
-    background-color: rgba(145, 173, 189, 0.904);
+    background-color: rgba(145, 173, 189, 0.9);
     position: relative;
     color: white;
 }
@@ -81,4 +81,6 @@ nav{
 footer{
     position: relative;
     z-index: 2;
+    background-color: #343A40;
+    color: rgb(196, 195, 195);
 }
