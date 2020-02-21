@@ -11,16 +11,34 @@ const router = express.Router();
 
 //INDEX - Show all campgrounds
 router.get('/', function (req, res) {
-    //Get all campgrounds from DB
-    Campground.find({}, function(err, allCampgrounds){
-        if (err) {
-            req.flash('error', 'Something went wrong.');
-            console.log(err.message);
-            return res.redirect('back');
-        } else {
-            return res.render('campgrounds/index', {campgrounds: allCampgrounds});
-        }
-    });    
+    let noMatch;
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+
+        Campground.find({name: regex}, function(err, allCampgrounds){
+            if (err) {
+                req.flash('error', 'Something went wrong.');
+                console.log(err.message);
+                return res.redirect('back');
+            } else {
+                if(allCampgrounds.length < 1){
+                    noMatch = 'No campgrounds found.'
+                }
+                return res.render('campgrounds/index', {campgrounds: allCampgrounds, noMatch: noMatch});
+            }
+        });
+    } else {
+        //Get all campgrounds from DB
+        Campground.find({}, function(err, allCampgrounds){
+            if (err) {
+                req.flash('error', 'Something went wrong.');
+                console.log(err.message);
+                return res.redirect('back');
+            } else {
+                return res.render('campgrounds/index', {campgrounds: allCampgrounds, noMatch: noMatch});
+            }
+        });  
+    }  
 });
 
 //NEW - Show new campground form
@@ -144,5 +162,9 @@ router.delete('/:id', middleware.checkCampgroundOwnership, async (req, res) => {
         return res.redirect('back');
     }
 });
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;
