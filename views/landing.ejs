@@ -2,14 +2,22 @@
     <link rel="stylesheet" href="/stylesheets/landing.css">
 
 <div class="row flex-grow-1 justify-content-center align-items-center no-gutters">
-    <div class="col-10 col-lg-5 text-center">
-        <div class="jumbotron pb-1">
+    <div class="col-10 col-lg-5">
+        <div class="jumbotron pb-1 d-flex flex-column align-items-center">
             <div class="header">
                 <h1 class="display-4">YelpCamp</h1>
             </div>
             <p class="lead">View your next vactation spot now!</p>             
             <p class="lead mt-5">
                 <a class="btn btn-success btn-lg" href="/campgrounds" role="button"><i class="fas fa-tree pr-3"></i>Explore</a>
+                <form action="/campgrounds" method="GET" class="form-inline">
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="search" placeholder="Search Campgrounds">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-light border"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
             </p>
         </div>
     </div>
